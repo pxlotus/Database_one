@@ -8,13 +8,15 @@ except exception:
     print('database failure')
 
 cur = conn.cursor()
-CAGE = [cur.execute('SELECT ID,NAME,LIVES,WEIGHT,LEGS,CLASS,NUMBER,CATEGORY FROM CAGE')]
+cur.execute('SELECT ID,NAME,LIVES,WEIGHT,LEGS,CLASS,NUMBER,CATEGORY FROM CAGE')
 
-rows = cur.fetchone()
+rows = cur.fetchall()
 while True:
     for row in rows:
-        print(row)
-        row = cur.fetchone()
+        row = cur.fetchall()
+        break
+    print(row)
+
 
 conn.commit()
 conn.close()
