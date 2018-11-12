@@ -24,8 +24,6 @@ def quick_search():
 
 
 class DatabaseConnection:
-    x = []
-
     def __init__(self):
         self.flash_db = psycopg2.connect(database='wildlife', user='postgres', password='P@$$w0rd', host='localhost')
         self.cur = self.flash_db.cursor()
@@ -33,11 +31,13 @@ class DatabaseConnection:
 
     def query_table(self):
         self.cur = self.flash_db.cursor()
-        self.cur.execute('SELECT ID,NAME,LIVES,WEIGHT,LEGS,CLASS,NUMBER,CATEGORY FROM CAGE')
+        self.cur.execute('SELECT '
+                         'ID,NAME,LIVES,WEIGHT,LEGS,CLASS,NUMBER,CATEGORY '
+                         'FROM CAGE')
 
-        rows = self.cur.fetchone()
-        for x in rows:
-            print(rows)
+        rows = self.cur.fetchall()
+        for row in rows:
+            print([row[0], row[1], row[2], row[4], row[5], row[6], row[7]])
 
 
 quick_search()
